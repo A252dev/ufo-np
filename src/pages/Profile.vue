@@ -4,6 +4,7 @@ import TransferSection from '@/components/UI/profile/TransferSection.vue'
 import WalletSection from '@/components/UI/profile/WalletSection.vue'
 import AddBalanceSection from '@/components/UI/profile/AddBalanceSection.vue'
 import authService from '@/services/auth.service'
+import ConvertSection from '@/components/UI/profile/ConvertSection.vue';
 
 </script>
 
@@ -124,6 +125,7 @@ export default {
 
             <div class="right side" v-if="selectedContent === 'wallet'">
                 <WalletSection />
+                <ConvertSection />
             </div>
 
             <div class="right side" v-if="selectedContent === 'history'">

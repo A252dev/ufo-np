@@ -26,6 +26,16 @@ class ActionService {
 
     }
 
+    async convert(convertData) {
+
+        return await axios.post(URL + '/user/convert', convertData, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('jwt')
+            },
+        });
+
+    }
+
 }
 
 
