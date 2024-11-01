@@ -1,12 +1,35 @@
+<script>
+import actionService from '@/services/action.service';
+
+export default {
+
+    data() {
+        return {
+            addBalanceData: {
+                amount: '',
+                currency: ''
+            }
+        }
+    },
+    methods: {
+        onSubmit(addBalanceData) {
+            actionService.addBalance(addBalanceData);
+            this.addBalanceData = '';
+        }
+    }
+}
+</script>
+
 <template>
-    <form method="post">
+    <form method="post" @submit.prevent>
         <h5 class="info__title">Add Balance</h5>
 
         <div class="block__container">
             <h3 class="input__title">Summa:</h3>
-            <input class="input__data" name="summa" type="number" autocomplete="off" />
+            <input class="input__data" v-bind:value="addBalanceData.amount"
+                @input="addBalanceData.amount = $event.target.value" type="number" autocomplete="off" />
             <h3 class="input__title">Currency:</h3>
-            <select name="currency">
+            <select v-bind:value="addBalanceData.currency" @input="addBalanceData.currency = $event.target.value">
                 <option value="AUD" selected>Australian dollar (AUD)</option>
                 <option value="BRL">Brazilian real (BRL)</option>
                 <option value="CAD">Canadian dollar (CAD)</option>
@@ -32,7 +55,7 @@
                 <option value="THB">Thai baht (THB)</option>
                 <option value="USD">United States dollar (USD)</option>
             </select>
-            <input type="button" class="button" value="Add Balance" />
+            <input type="button" class="button" @click="onSubmit(addBalanceData)" value="Add Balance" />
         </div>
     </form>
 </template>

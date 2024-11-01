@@ -1,7 +1,5 @@
 <script setup>
 
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import authService from '@/services/auth.service'
 
 import '@/assets/styles/reg_log.css'

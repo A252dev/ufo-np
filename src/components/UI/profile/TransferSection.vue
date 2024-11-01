@@ -1,14 +1,41 @@
+<script setup>
+import actionService from '@/services/action.service'
+</script>
+
+<script>
+
+export default {
+    data() {
+        return {
+            transferData: {
+                toEmail: '',
+                amount: '',
+                currency: ''
+            }
+        }
+    },
+    methods: {
+        onSubmit(transferData) {
+            actionService.tranfer(transferData);
+            this.transferData = '';
+        }
+    }
+}
+</script>
+
 <template>
-    <form method="post">
+    <form method="post" @submit.prevent>
         <h5 class="info__title">Transfer</h5>
 
         <div class="block__container">
             <h3 class="input__title">To email:</h3>
-            <input class="input__data" name="toEmail" type="email" autocomplete="off" />
+            <input class="input__data" v-bind:value="transferData.toEmail"
+                @input="transferData.toEmail = $event.target.value" type="email" autocomplete="off" />
             <h3 class="input__title">Summa:</h3>
-            <input class="input__data" name="summa" type="number" autocomplete="off" />
+            <input class="input__data" v-bind:value="transferData.amount"
+                @input="transferData.amount = $event.target.value" type="number" autocomplete="off" />
             <h3 class="input__title">Currency:</h3>
-            <select name="currency">
+            <select v-bind:value="transferData.currency" @input="transferData.currency = $event.target.value">
                 <option value="AUD" selected>Australian dollar (AUD)</option>
                 <option value="BRL">Brazilian real (BRL)</option>
                 <option value="CAD">Canadian dollar (CAD)</option>
@@ -34,7 +61,7 @@
                 <option value="THB">Thai baht (THB)</option>
                 <option value="USD">United States dollar (USD)</option>
             </select>
-            <input type="button" class="button" value="Transfer" />
+            <input type="button" class="button" @click="onSubmit(transferData)" value="Transfer" />
         </div>
     </form>
 </template>

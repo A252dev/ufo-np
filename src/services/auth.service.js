@@ -39,6 +39,7 @@ class AuthService {
 
     logout() {
         localStorage.removeItem('jwt');
+        router.push('/');
     }
 }
 
