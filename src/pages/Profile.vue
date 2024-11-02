@@ -1,7 +1,6 @@
 <script setup>
 
 import TransferSection from '@/components/UI/profile/TransferSection.vue'
-import WalletSection from '@/components/UI/profile/WalletSection.vue'
 import AddBalanceSection from '@/components/UI/profile/AddBalanceSection.vue'
 import authService from '@/services/auth.service'
 import ConvertSection from '@/components/UI/profile/ConvertSection.vue';
@@ -12,12 +11,14 @@ import ConvertSection from '@/components/UI/profile/ConvertSection.vue';
 
 export default {
 
-    async mounted() {
-        console.log('loading...');
+    async beforeMount() {
+        // console.log('loading...');
         let info = await authService.getInfo();
         JSON.stringify(info);
-        this.user = info.data.data;
-        console.log(this.user);
+        this.user = info.data.data.user;
+        this.balance = info.data.data.balance[0];
+        // console.log(this.user);
+        // console.log(this.balance.AUD);
     },
 
     data() {
@@ -28,6 +29,34 @@ export default {
                 email: '',
                 firstName: '',
                 secondName: '',
+                birthday: '',
+            },
+
+            balance: {
+                AUD: '',
+                BRL: '',
+                CAD: '',
+                CNY: '',
+                CZK: '',
+                DKK: '',
+                EUR: '',
+                HKD: '',
+                HUF: '',
+                ILS: '',
+                JPY: '',
+                MYR: '',
+                MXN: '',
+                TWD: '',
+                NZD: '',
+                NOK: '',
+                PHP: '',
+                PLN: '',
+                GBP: '',
+                SGD: '',
+                SEK: '',
+                CHF: '',
+                THB: '',
+                USD: ''
             }
         }
     },
@@ -115,7 +144,7 @@ export default {
                     <h3 class="input__title">Second Name</h3>
                     <input class="input__data" v-model="user.secondName" disabled />
                     <h3 class="input__title">Birthday</h3>
-                    <input class="input__data" value="birthday" disabled />
+                    <input class="input__data" v-model="user.birthday" disabled />
                 </div>
             </div>
 
@@ -124,7 +153,35 @@ export default {
             </div>
 
             <div class="right side" v-if="selectedContent === 'wallet'">
-                <WalletSection />
+                <h5 class="info__title">Wallet</h5>
+
+                <div class="block__container">
+                    <h3 class="input__title">{{ balance.AUD }} AUD | Australian dollar</h3>
+                    <h3 class="input__title">{{ balance.BRL }} BRL | Brazilian real</h3>
+                    <h3 class="input__title">{{ balance.CAD }} CAD | Canadian dollar </h3>
+                    <h3 class="input__title">{{ balance.CNY }} CNY | Chinese Renmenbi</h3>
+                    <h3 class="input__title">{{ balance.CZK }} CZK | Czech koruna</h3>
+                    <h3 class="input__title">{{ balance.DKK }} DKK | Danish krone</h3>
+                    <h3 class="input__title">{{ balance.EUR }} EUR | Euro</h3>
+                    <h3 class="input__title">{{ balance.HKD }} HKD | Hong Kong dollar</h3>
+                    <h3 class="input__title">{{ balance.HUF }} HUF | Hungarian forint</h3>
+                    <h3 class="input__title">{{ balance.ILS }} ILS | Israeli new shekel</h3>
+                    <h3 class="input__title">{{ balance.JPY }} JPY | Japanese yen</h3>
+                    <h3 class="input__title">{{ balance.MYR }} MYR | Malaysian ringgit</h3>
+                    <h3 class="input__title">{{ balance.MXN }} MXN | Mexican peso</h3>
+                    <h3 class="input__title">{{ balance.TWD }} TWD | New Taiwan dollar</h3>
+                    <h3 class="input__title">{{ balance.NZD }} NZD | New Zealand dollar</h3>
+                    <h3 class="input__title">{{ balance.NOK }} NOK | Norwegian krone</h3>
+                    <h3 class="input__title">{{ balance.PHP }} PHP | Philippine peso</h3>
+                    <h3 class="input__title">{{ balance.PLN }} PLN | Polish złoty</h3>
+                    <h3 class="input__title">{{ balance.GBP }} GBP | Pound sterling</h3>
+                    <h3 class="input__title">{{ balance.SGD }} SGD | Singapore dollar</h3>
+                    <h3 class="input__title">{{ balance.SEK }} SEK | Swedish krona</h3>
+                    <h3 class="input__title">{{ balance.CHF }} CHF | Swiss franc</h3>
+                    <h3 class="input__title">{{ balance.THB }} THB | Thai baht</h3>
+                    <h3 class="input__title">{{ balance.USD }} USD | United States dollar</h3>
+                </div>
+
                 <ConvertSection />
             </div>
 

@@ -5,6 +5,25 @@ import authService from '@/services/auth.service'
 
 </script>
 
+<script>
+export default {
+    data() {
+        return {
+            status: ''
+        }
+    },
+    // methods: {
+    //     getAuthInfo() {
+    //         if (localStorage.getItem('jwt') != null) {
+    //             this.status = 'auth';
+    //         } else {
+    //             return null;
+    //         }
+    //     }
+    // }
+}
+</script>
+
 <template>
     <header>
         <div class="header">

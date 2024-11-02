@@ -18,6 +18,10 @@ class AuthService {
         }
     }
 
+    register(user) {
+        return axios.post(URL + '/register', user);
+    }
+
     login(user) {
 
         // console.log(user);
@@ -33,7 +37,8 @@ class AuthService {
                     localStorage.setItem('jwt', response.data.data.access_token);
                 }
 
-                return response.data.data.access_token;
+                // return response.data.data.access_token;
+                return router.push('/profile');
             })
     }
 

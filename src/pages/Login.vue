@@ -48,7 +48,7 @@ export default {
         async onSubmit(user) {
 
             authService.login(user);
-            this.$router.push('/profile');
+            // this.$router.push('/profile');
 
             // Make a request to the server
             // const response = await axios.post('http://127.0.0.1:8000/api/login', user);

@@ -23,10 +23,13 @@ export default {
     },
     methods: {
         onSubmit(registerData) {
-            if (this.registerData.password != this.repeatPassword) console.log('password error');
-            authService.register(registerData);
-            this.registerData = '';
-            router.push('/login');
+            if (this.registerData.password != this.repeatPassword) {
+                console.log('password error');
+            } else {
+                authService.register(registerData);
+                this.registerData = '';
+                router.push('/login');
+            }
         }
     }
 }
